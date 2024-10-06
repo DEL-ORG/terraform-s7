@@ -1,4 +1,5 @@
 # terraform-s7
+list of resources
 ```
 s3-backend
 aws-auth-config
