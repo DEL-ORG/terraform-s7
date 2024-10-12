@@ -4,7 +4,7 @@ terraform {
     bucket         = "terraform-s7-state-test"
     key            = "ec2/terraform.tfstate"
     region         = "us-east-1"  # Ensure region is correct
-    # dynamodb_table = aws_dynamodb_table.tf_state_lock.name
+    dynamodb_table = "terraform-s7-state-locks"
     encrypt        = true
   }
 }

@@ -21,3 +21,31 @@ resource "aws_s3_bucket_versioning" "versioning_example" {
     status = "Enabled"
   }
 }
+
+
+# DynamoDB table for state locking
+resource "aws_dynamodb_table" "terraform_locks" {
+  name         = "terraform-s7-state-locks"  # Unique name for the table
+  billing_mode = "PAY_PER_REQUEST"        # Use on-demand billing for flexibility
+
+  attribute {
+    name = "LockID"
+    type = "S"  # String type for LockID
+  }
+
+  # Define primary key
+  hash_key = "LockID"
+
+  tags = {
+    Name        = "Terraform State Lock Table"
+    Environment = "dev"
+  }
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.tf_state_bucket.bucket
+}
+
+output "dynamodb_table_name" {
+  value = aws_dynamodb_table.terraform_locks.name
+}
