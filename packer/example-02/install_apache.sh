@@ -5,7 +5,7 @@ function install_apache {
     # Update the package list and upgrade existing packages
     echo "Updating package list..."
     sudo yum update -y
-
+    
     # Install wget and unzip
     echo "Installing wget and unzip..."
     sudo yum install -y wget unzip
@@ -28,6 +28,10 @@ function install_apache {
     # Set permissions for the web directory
     echo "Setting permissions for the web directory..."
     sudo chown -R apache:apache /var/www/html/*
+    
+    # Display the status of Apache
+    echo "Apache HTTP Server status:"
+    sudo systemctl status httpd
 }
 
 # Call the install_apache function
